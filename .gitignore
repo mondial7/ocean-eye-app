@@ -1,0 +1,4 @@
+app/configs/
+app/core/logs/
+.scannerwork
+sonar-project.properties
