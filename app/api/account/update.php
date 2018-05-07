@@ -28,13 +28,6 @@ class Update extends EKEApiController {
 	 */
 	public function run() {
 
-		global $userLogged;
-
-    if (!$userLogged) {
-      $this->response = $this->ERR_NOT_LOGGED;
-      return $this;
-    }
-
 		$op = $_POST[self::OP];
 
     // check operation parameter

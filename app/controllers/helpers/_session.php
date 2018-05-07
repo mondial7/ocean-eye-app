@@ -8,10 +8,14 @@ Session::init();
 
 /**
  * Check if current session contains already the user data
+ *
+ * @var Boolean
  */
-$userLogged = Session::exists('username');
+define('USER_LOGGED', Session::exists('username'));
 
 /**
- * Define useful global variables
+ * Logged user id
+ *
+ * @var Mixed[String|Int]
  */
-$account_id = Session::get('id');
+define('USER_ID', Session::get('id'));

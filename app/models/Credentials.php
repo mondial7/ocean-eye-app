@@ -72,7 +72,7 @@ class Credentials extends EKEModel {
       $user = $users[0];
 
       // Match passwords
-      require_once MODELS_DIR . '/PasswordUtility.php';
+      require_once UTILS_DIR . '/PasswordUtility.php';
       $passwordMatch = PasswordUtility::match($password, $user['password']);
 
       // Store user_id, username, email
@@ -147,7 +147,7 @@ class Credentials extends EKEModel {
      */
 
     // hash password
-    require_once MODELS_DIR . '/PasswordUtility.php';
+    require_once UTILS_DIR . '/PasswordUtility.php';
     $password = PasswordUtility::hash($password);
 
     $query = "INSERT INTO {$this->USERTABLE} (email, username, password)

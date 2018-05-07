@@ -1,17 +1,18 @@
 <?php
 
 /**
- * Api abstract class
+ * Api class
  * Extended by all api endpoints
  * The 'run()' method is triggered automatically by the APIRouter
  */
-abstract class EKEApiController {
+class EKEApiController {
 
   /**
    * @var String
    */
   protected const STATUS = 'status';
   protected const DETAILS = 'details';
+  protected const DATA = 'data';
   protected const ERROR = 'ERROR';
   protected const OK = 'OK';
 
@@ -43,7 +44,7 @@ abstract class EKEApiController {
    */
   protected $SUCCESS;
 
-  public function __constructor() {
+  public function __construct() {
     // baked error messages
     $this->ERR_TRIVIAL = $this->error('Trivial api');
     $this->ERR_BAD_REQUEST = $this->error('Bad request');
@@ -67,27 +68,6 @@ abstract class EKEApiController {
   }
 
   /**
-   * Factory for error messages
-   *
-   * @param String message
-   * @return String json-formatted answer
-   */
-  protected function error($message) {
-    return $this->message(self::ERROR, $message);
-  }
-
-  /**
-   * Factory for success messages
-   *
-   * @param String message
-   * @param Array[Mixed] data
-   * @return String json-formatted answer
-   */
-  protected function success($message, $data = null) {
-    return $this->message(self::OK, $message);
-  }
-
-  /**
    * Factory for messages
    *
    * @param String status
@@ -101,6 +81,27 @@ abstract class EKEApiController {
       self::DETAILS => $message,
       self::DATA => $data,
     ]);
+  }
+
+  /**
+   * Factory for error messages
+   *
+   * @param String message
+   * @return String json-formatted answer
+   */
+  public function error($message) {
+    return $this->message(self::ERROR, $message);
+  }
+
+  /**
+   * Factory for success messages
+   *
+   * @param String message
+   * @param Array[Mixed] data
+   * @return String json-formatted answer
+   */
+  public function success($message = '', $data = null) {
+    return $this->message(self::OK, $message, $data);
   }
 
   /**

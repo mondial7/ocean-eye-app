@@ -2,7 +2,6 @@
 
 // NOTE Only to develop in localhost
 header('Access-Control-Allow-Origin: *');
-
 /**
  * Prevent showing errors and warnings
  * (uncomment while developing)
@@ -10,25 +9,35 @@ header('Access-Control-Allow-Origin: *');
 //error_reporting(0);
 ini_set('display_errors', 'on');
 
-/**
- * Load application core
- */
-require __DIR__ . '/app/core/autoload.php';
-
-/**
- * Handle user sessions
- */
-require CONTROLLERS_DIR . '/_session.php';
-
-/**
- * Define application routes
- */
-DumpRouter::route('api',['pretty_parameters' => ['feature','action']]);
-
-/**
- * Trigger the router and evaluate the uri path
- */
-require DumpRouter::loadController(
-  $_SERVER['REQUEST_URI'],
-  './app/controllers/pages/'
-);
+// Run application
+require __DIR__ . '/app/core/EKE.php';
+EKE::go([
+  /**
+   * Enable api listener
+   * @var Boolean
+   */
+  'api' => true,
+  /**
+   * Scripts to be included before the controller
+   * Scripts are included in the provided order
+   * Scripts are stored in app/controllers/helpers/
+   * @var Array[String]
+   */
+  'before' => [
+    '_session',
+  ],
+  /**
+   * Scripts to be included after the controller
+   * Scripts are included in the provided order
+   * @var Array[String]
+   */
+  // 'after' => [],
+  /**
+   * Routes definition, combine routes/parameters
+   * with the corresponding controller
+   * @var Array[String=>Array[String=>Array[String]]]
+   */
+  'routes' => [
+    '/' => [], // home -> TODO -> serve polymer application
+  ],
+]);

@@ -28,7 +28,16 @@ class APIRouter {
     $this->features = array_keys($apiPaths);
     // prepare an instance of EKEAPIController
     // use this controller to send formatted response on errors
-    $this->controller = new class extends EKEAPIController {};
+    $this->controller = new class extends EKEAPIController {
+      /**
+       * Extend parent method
+       * @param String
+       * @return Void
+       */
+      public function error($message) {
+        $this->response = parent::error($message);
+      }
+    };
   }
 
   /**
@@ -37,7 +46,7 @@ class APIRouter {
    * @param String feature
    * @param String action
    */
-  public function evaluate($feature, $action) {
+  public function evaluate($feature = '', $action = '') {
     // validate give parameters
     if (!$this->_validate($feature, $action)) {
       // misleading error message for wrong given parameters
@@ -51,7 +60,7 @@ class APIRouter {
         $this->controller->error('Wrong request');
       } else {
         // include api class
-        include_once $api;
+        require_once $api;
         // override the controller with real api
         $this->controller = new $action();
         // execute api controller
@@ -84,7 +93,7 @@ class APIRouter {
    */
   private function _validate($feature, $action) {
     return in_array($feature, $this->features) &&
-           in_array($action, $this->apiPaths[$action]);
+           in_array($action, $this->apiPaths[$feature] ?? []);
   }
 
 }

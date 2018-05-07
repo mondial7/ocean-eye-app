@@ -164,7 +164,7 @@ class ProfileManager extends EKEModel {
       $user = $users[0];
 
       // Match passwords
-      require_once MODELS_DIR . '/PasswordUtility.php';
+      require_once UTILS_DIR . '/PasswordUtility.php';
 
       return PasswordUtility::match($password, $user['password']);
 
