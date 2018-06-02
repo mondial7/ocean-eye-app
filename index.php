@@ -38,6 +38,9 @@ EKE::go([
    * @var Array[String=>Array[String=>Array[String]]]
    */
   'routes' => [
-    '/' => [], // home -> TODO -> serve polymer application
+    '/' => [
+      'controller' => 'landing'
+    ],
+    'dashboard' => [],
   ],
 ]);
