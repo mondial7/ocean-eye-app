@@ -24,7 +24,7 @@ mv build/app/assets/dashboard/index.html build/app/templates/dashboard/index.htm
 # clean logs folder
 rm -rf build/app/core/logs/
 
-echo '🌪🌪🌪 Done building'
+echo '🔥🔥🔥 Done building'
 
 # start deployment
 echo '🚀🚀🚀 Ready to deploy!'
