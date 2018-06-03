@@ -18,7 +18,7 @@ class Credentials extends EKEModel {
    *      query declaration with an ORM
    * @var String
    */
-  private $USERTABLE = 'oceaneye__users';
+  private $USERTABLE = 'oceaneye__user';
 
   /**
    * @var String
@@ -134,7 +134,7 @@ class Credentials extends EKEModel {
   public function register(Profile $user) {
 
     $email = $user->getEmail();
-    $username = $user->getUsername();
+    // $username = $user->getUsername();
     $password = $user->getPassword();
 
     /************************************
@@ -150,12 +150,14 @@ class Credentials extends EKEModel {
     require_once UTILS_DIR . '/PasswordUtility.php';
     $password = PasswordUtility::hash($password);
 
-    $query = "INSERT INTO {$this->USERTABLE} (email, username, password)
-              VALUES ( ? , ? , ? );";
+    // $query = "INSERT INTO {$this->USERTABLE} (email, username, password)
+    //           VALUES ( ? , ? , ? );";
+    $query = "INSERT INTO {$this->USERTABLE} (email, password)
+              VALUES ( ? , ? );";
 
-    $options = ['types' => ['sss'], 'params' => [
+    $options = ['types' => ['ss'], 'params' => [
       $email,
-      $username,
+      // $username,
       $password
     ]];
 

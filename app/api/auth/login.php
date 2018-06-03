@@ -28,9 +28,7 @@ class Login extends EKEApiController {
 	 */
 	public function run() {
 
-		global $userLogged;
-
-    if ($userLogged) {
+    if (USER_LOGGED) {
       $this->response = $this->ERR_ALREADY_LOGGED;
       return $this;
     }

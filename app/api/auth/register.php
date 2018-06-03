@@ -10,8 +10,8 @@ class Register extends EKEApiController {
 	 * @var String
 	 */
 	private const PASSWORD = 'password';
-	private const PASSWORD_CHECK = 'passwordcheck';
-	private const USERNAME = 'username';
+	// private const PASSWORD_CHECK = 'passwordcheck';
+	// private const USERNAME = 'username';
 	private const EMAIL = 'email';
 
 	/**
@@ -19,8 +19,8 @@ class Register extends EKEApiController {
 	 */
 	private $parameters = [
 		self::PASSWORD,
-		self::PASSWORD_CHECK,
-		self::USERNAME,
+		// self::PASSWORD_CHECK,
+		// self::USERNAME,
 		self::EMAIL,
 	];
 
@@ -29,9 +29,7 @@ class Register extends EKEApiController {
 	 */
 	public function run() {
 
-		global $userLogged;
-
-    if ($userLogged) {
+    if (USER_LOGGED) {
       $this->response = $this->ERR_ALREADY_LOGGED;
       return $this;
     }
@@ -41,13 +39,13 @@ class Register extends EKEApiController {
 			return $this;
 		}
 
-    /**
-     * passwords match
-     */
-    if ($_POST[self::PASSWORD] !== $_POST[self::PASSWORD_CHECK]) {
-    	$this->response = $this->error('Passwords do not match');
-    	return $this;
-    }
+    // /**
+    //  * passwords match
+    //  */
+    // if ($_POST[self::PASSWORD] !== $_POST[self::PASSWORD_CHECK]) {
+    // 	$this->response = $this->error('Passwords do not match');
+    // 	return $this;
+    // }
 
     /**
      * password is long enough
@@ -69,8 +67,9 @@ class Register extends EKEApiController {
      * Set account data
      */
     $account->setEmail($_POST[self::EMAIL]);
-    $account->setUsername($_POST[self::USERNAME]);
+    // $account->setUsernam($_POST[self::USERNAME]);
     $account->setPassword($_POST[self::PASSWORD]);
+		// TODO add team parameter
 
     /**
      * Check if email already exists
@@ -80,13 +79,13 @@ class Register extends EKEApiController {
     	return $this;
     }
 
-    /**
-     * Check if username already exists
-     */
-    if ($credentials->usernameExists($account->getUsername())) {
-    	$this->response = $this->error('Username already exists');
-    	return $this;
-    }
+    // /**
+    //  * Check if username already exists
+    //  */
+    // if ($credentials->usernameExists($account->getUsername())) {
+    // 	$this->response = $this->error('Username already exists');
+    // 	return $this;
+    // }
 
 		// validate input and try to register
 		if ($account->isValid() && (new Credentials())->register($account)) {
