@@ -1,4 +1,5 @@
 # TODO update configs -> DB credentials
+# TODO update API_HOST && API.HOST -> ocean-eye-landing && ocean-eye
 
 # prepare build
 bash build.sh
