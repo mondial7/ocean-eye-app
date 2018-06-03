@@ -43,7 +43,6 @@ class Login extends EKEApiController {
 
 		// verify user
 		require_once MODELS_DIR . '/Credentials.php';
-		require_once MODELS_DIR . '/AccessToken.php';
 		require_once MODELS_DIR . '/Profile.php';
 
     $user = new Profile();
@@ -51,31 +50,22 @@ class Login extends EKEApiController {
     $user->setUserkey($_POST[self::USERKEY]);
 
 		$credentials = new Credentials();
-		$accesstoken = new AccessToken();
 
 		// validate inputs and try login
 		if ($user->isValid() && $credentials->login($user)) {
 
-			// retrieve user id
+			// use profile model to parse data
 			$user->setId($credentials->getUserId());
 			$user->setEmail($credentials->getUserEmail());
 			$user->setUsername($credentials->getUserUsername());
 
-			// store/register access token
-			if ($accesstoken->register($user)) {
+			// return access parameters
+			$this->response = $this->success('logged in', [
+				self::ID 				=> $user->getId(),
+				self::USERNAME 	=> $user->getUsername(),
+				self::EMAIL 		=> $user->getEmail(),
+			]);
 
-				// return access parameters
-				$this->response = $this->success('logged in', [
-					self::ID 				=> $user->getId(),
-					self::USERNAME 	=> $user->getUsername(),
-					self::EMAIL 		=> $user->getEmail(),
-				]);
-
-			} else {
-
-				$this->response = $this->error('Couldn\'t register the access token');
-
-			}
 		} else {
 
 			$this->response = $this->ERROR;
