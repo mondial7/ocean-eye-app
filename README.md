@@ -9,13 +9,6 @@ git clone https://github.com/mondial7/ocean-eye-app.git
 cd ocean-eye-app/
 ```
 
-### Twig dependency
-
-```bash
-cd app/
-composer install
-```
-
 ### DB config
 
 ```bash
@@ -33,9 +26,12 @@ define('DB_PASSWORD', 'ocean');
 define('DB_DATABASE', 'oceaneye');
 ```
 
+### Deploy
+
+
 ### Infinite backlog
 
-- [ ] Polymer Template/View integration
+- [x] Polymer Template/View integration
 - [ ] DB dump
 - [ ] API docs
 - [ ] PHPUnit tests for application core

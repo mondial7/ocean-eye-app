@@ -4,8 +4,10 @@ rm -r build
 mkdir build
 # build frontend repositories
 cd ocean-eye-landing/
+echo '🔥🔥🔥 Building landing'
 polymer build --preset 'es5-bundled' --base-path '/ocean-eye/app/assets/landing/'
 cd ../ocean-eye/
+echo '🔥🔥🔥 Building dashboard'
 polymer build --preset 'es5-bundled' --base-path '/ocean-eye/app/assets/dashboard/'
 cd ..
 echo '🔥🔥🔥 Frontend ready'
