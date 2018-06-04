@@ -7,7 +7,7 @@ bash build.sh
 # start deployment
 echo '🚀🚀🚀 Ready to deploy!'
 
-cd build
+cd ../build
 # echo 'put -rp ./ ./ocean-eye/' > deploy_rules # need a ssh key to use this
 sftp startupradiator.com@ssh.startupradiator.com
 
