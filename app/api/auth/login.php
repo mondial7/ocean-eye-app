@@ -56,13 +56,15 @@ class Login extends EKEApiController {
 			$user->setId($credentials->getUserId());
 			$user->setEmail($credentials->getUserEmail());
 			$user->setUsername($credentials->getUserUsername());
-
-			// return access parameters
-			$this->response = $this->success('logged in', [
+			$userData = [
 				self::ID 				=> $user->getId(),
 				self::USERNAME 	=> $user->getUsername(),
 				self::EMAIL 		=> $user->getEmail(),
-			]);
+			];
+			// save in session
+			Session::addArray($userData);
+			// return access parameters
+			$this->response = $this->success('logged in', $userData);
 
 		} else {
 

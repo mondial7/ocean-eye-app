@@ -11,7 +11,7 @@ Session::init();
  *
  * @var Boolean
  */
-define('USER_LOGGED', Session::exists('username'));
+define('USER_LOGGED', Session::exists('email'));
 
 /**
  * Logged user id
