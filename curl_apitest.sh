@@ -11,6 +11,13 @@ printf "\n\n🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢
 
 
 printf "\n\n✨✨✨✨✨✨✨✨✨✨✨✨\n"
+printf "         Logout --> Not logged (should pass session cookie to be logged)"
+printf "\n✨✨✨✨✨✨✨✨✨✨✨✨\n\n"
+curl -X POST ${API_HOST}auth/logout
+printf "\n\n🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢\n\n"
+
+
+printf "\n\n✨✨✨✨✨✨✨✨✨✨✨✨\n"
 printf "         Register ---> too short password"
 printf "\n✨✨✨✨✨✨✨✨✨✨✨✨\n\n"
 curl -d "email=$DEMO_EMAIL&password=halo" -X POST ${API_HOST}auth/register

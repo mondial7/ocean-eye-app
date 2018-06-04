@@ -8,7 +8,7 @@ $apiPaths = [
    *  folder => [filename, filename, ...],
    * ]
    */
-  'auth' => ['login','register','recovery',],
+  'auth' => ['login','register','recovery','logout',],
 ];
 
 /**
