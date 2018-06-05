@@ -29,3 +29,11 @@ printf "         Register ---> OK || Email already exists"
 printf "\n✨✨✨✨✨✨✨✨✨✨✨✨\n\n"
 curl -d "email=$DEMO_EMAIL&password=$DEMO_PASSWORD" -X POST ${API_HOST}auth/register
 printf "\n\n🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢\n\n"
+
+
+
+printf "\n\n✨✨✨✨✨✨✨✨✨✨✨✨\n"
+printf "         Collections/Add"
+printf "\n✨✨✨✨✨✨✨✨✨✨✨✨\n\n"
+curl -d "items='[1,2,3]'" -X POST ${API_HOST}collections/add
+printf "\n\n🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢🐢\n\n"

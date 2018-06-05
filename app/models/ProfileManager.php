@@ -13,7 +13,7 @@ class ProfileManager extends EKEModel {
    *      query declaration with an ORM
    * @var String
    */
-  private $USERTABLE = 'oceaneye__users';
+  private $USERTABLE = 'oceaneye__user';
 
 
   function __construct() {

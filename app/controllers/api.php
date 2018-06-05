@@ -16,6 +16,9 @@ $apiPaths = [
  */
 if (USER_LOGGED) {
   $apiPaths['account'] = ['update',];
+  $apiPaths['collections'] = ['add',];
+  $apiPaths['items'] = ['add',];
+  $apiPaths['list'] = ['collections','informationitems',];
   $apiPaths['project'] = ['collections','members',];
   // 'play' => [],
   // 'information' => ['update',],
