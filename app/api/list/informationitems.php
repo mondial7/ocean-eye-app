@@ -23,7 +23,7 @@ class Informationitems extends EKEApiController {
 		// }
 
 		require_once MODELS_DIR . '/ItemsManager.php';
-		$this->response = (new ItemsManager())->list();
+		$this->response = json_encode((new ItemsManager())->list());
 
 		return $this;
 	}
