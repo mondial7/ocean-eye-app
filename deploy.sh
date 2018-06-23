@@ -1,8 +1,10 @@
-# TODO update configs -> DB credentials
 # TODO update API_HOST && API.HOST -> ocean-eye-landing && ocean-eye
 
 # prepare build
 bash build.sh
+
+# update db credentials
+cp -f ../EKEDB_config.php ../build/app/configs/EKEDB_config.php
 
 # start deployment
 echo '🚀🚀🚀 Ready to deploy!'
