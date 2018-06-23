@@ -24,7 +24,10 @@ class Collections extends EKEApiController {
 
 		require_once MODELS_DIR . '/CollectionsManager.php';
 		// NOTE USER_ID will have to be refactored to project
-		$this->response = json_encode((new CollectionsManager())->list());
+		$this->response = $this->success(
+			'items list',
+			(new CollectionsManager())->list()
+		);
 
 		return $this;
 	}
