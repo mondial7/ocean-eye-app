@@ -45,16 +45,21 @@ class CollectionsManager extends EKEModel {
       // get last insert id
       $collectionId = $this->db->insert_id();
       // save all items
-      foreach ($coll->getItems() as $id) {
+      foreach ($coll->getItems() as $item) {
         $query = "INSERT INTO {$this->COLLITEMTABLE}
-                  (collection_id, informationitem_id)
-                  VALUES ( ? , ? );";
-        $options = [ 'types' => ['ii'], 'params' => [
+                  (collection_id, informationitem_id,
+                   actionable_, leading_, motivation_, frequency_)
+                  VALUES ( ? , ? , ? , ? , ? , ? );";
+        $options = [ 'types' => ['iiiiii'], 'params' => [
           $collectionId,
-          $id,
+          $item['id'],
+          $item['actionable_'],
+          $item['leading_'],
+          $item['motivation_'],
+          $item['frequency_'],
         ]];
         $this->db->query($query, $options);
-        if ($this->db->getAffectedNum() === 1) {
+        if ($this->db->getAffectedNum() !== 1) {
           // log exception ...
           return false;
         }

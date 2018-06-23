@@ -38,13 +38,13 @@ class Add extends EKEApiController {
 
     $collection = new Collection();
 
-    $items = json_decode($_POST[self::ITEMS], true);
-		$collection->setItems($items);
-		// validate inputs
+    $items = json_decode($_POST[self::ITEMS], TRUE);
+    $collection->setItems($items);
+    // validate inputs
 		if ($collection->isValid() && (new CollectionsManager())->add($collection)){
       // NOTE might return the recorded collection
       // ...
-      $this->response = $this->STATUS_OK;
+      $this->response = $this->SUCCESS;
 		} else {
 			$this->response = $this->ERROR;
 		}

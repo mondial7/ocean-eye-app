@@ -115,15 +115,22 @@ class Collection extends EKEEntityModel {
     }
 
     /**
-     * @param Array[Int]
+     * @param Array[Item]
      */
     public function setItems($items) {
-      foreach ($items as $k => $id) {
-        $items[$k] = $this->cleanNumber($id);
+      foreach ($items as $item) {
+        // reformat item array
+        $keys = ['actionable','motivation','leading','frequency'];
+        foreach ($keys as $key) {
+          $item[$key] = $item[$key.'_'];
+          unset($item[$key.'_']);
+        }
+        $this->itemModel->loadFromArray($item);
+        if (!$this->itemModel->isValid()) {
+          $this->valid = FALSE;
+        }
       }
-      if ($this->isValid()) {
-        $this->items = $items;
-      }
+      $this->items = $this->valid ? $items : [];
     }
 
     /**
