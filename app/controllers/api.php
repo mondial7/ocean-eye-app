@@ -15,11 +15,11 @@ $apiPaths = [
  * Register logged protected api
  */
 if (USER_LOGGED) {
-  $apiPaths['account'] = ['update',];
+  $apiPaths['account'] = ['update','status',];
   $apiPaths['collections'] = ['add',];
   $apiPaths['items'] = ['add',];
   $apiPaths['list'] = ['collections','informationitems',];
-  $apiPaths['project'] = ['collections','members',];
+  // $apiPaths['project'] = ['collections','members',];
   // 'play' => [],
   // 'information' => ['update',],
 }
