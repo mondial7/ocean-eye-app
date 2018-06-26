@@ -8,20 +8,33 @@ $apiPaths = [
    *  folder => [filename, filename, ...],
    * ]
    */
-  'auth' => ['login','register','recovery','logout',],
+  'auth'        => ['login','register','recovery',],
+  'account'     => ['status',],
+  'collections' => [],
+  'items'       => [],
+  'list'        => [],
 ];
 
 /**
  * Register logged protected api
  */
 if (USER_LOGGED) {
-  $apiPaths['account'] = ['update','status',];
-  $apiPaths['collections'] = ['add',];
-  $apiPaths['items'] = ['add',];
-  $apiPaths['list'] = ['collections','informationitems',];
-  // $apiPaths['project'] = ['collections','members',];
-  // 'play' => [],
-  // 'information' => ['update',],
+  array_push($apiPaths['auth'],
+    'logout'
+  );
+  array_push($apiPaths['account'],
+    'update'
+  );
+  array_push($apiPaths['collections'],
+    'add'
+  );
+  array_push($apiPaths['items'],
+    'add'
+  );
+  array_push($apiPaths['list'],
+    'collections',
+    'informationitems'
+  );
 }
 
 /**
