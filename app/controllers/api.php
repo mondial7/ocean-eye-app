@@ -29,7 +29,8 @@ if (USER_LOGGED) {
     'add'
   );
   array_push($apiPaths['items'],
-    'add'
+    'add',
+    'status'
   );
   array_push($apiPaths['list'],
     'collections',

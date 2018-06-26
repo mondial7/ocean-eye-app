@@ -40,16 +40,21 @@ class Add extends EKEApiController {
 		require_once MODELS_DIR . '/ItemsManager.php';
 		require_once MODELS_DIR . '/Item.php';
 
+    $manager = new ItemsManager();
     $item = new Item();
 		$item->setName($_POST[self::NAME]);
 		$item->setSummary($_POST[self::SUMMARY]);
 		$item->setDimension($_POST[self::DIMENSION]);
 
 		// validate inputs
-		if ($item->isValid() && (new ItemsManager())->add($item)) {
-      // NOTE might return the recorded item
-      // ...
-      $this->response = $this->STATUS_OK;
+		if ($item->isValid() && $manager->add($item)) {
+      // get info of last insert item
+      // NOTE here should be better to have a second
+      //      condition, since another query is called
+      $this->response = $this->success(
+        'info added',
+        $manager->info($manager->lastAddedId())
+      );
 		} else {
 			$this->response = $this->ERROR;
 		}

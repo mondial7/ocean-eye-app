@@ -13,6 +13,10 @@ class ItemsManager extends EKEModel {
    */
   private $ITEMTABLE = 'oceaneye__informationitem';
 
+  /**
+   * @var Int
+   */
+  private $addedId;
 
   function __construct() {
 
@@ -46,9 +50,34 @@ class ItemsManager extends EKEModel {
     $this->db->query($query, $options);
 
     // store last added id
-    // ...
+    $this->addedId = $this->db->insert_id();
 
     return $this->db->getAffectedNum() === 1;
+
+  }
+
+  /**
+   * Exposed last added id
+   *
+   * @return Int
+   */
+  public function lastAddedId() {
+    return $this->addedId;
+  }
+
+  /**
+   * Get info of information item, given the id
+   *
+   * @param Int
+   * @return Array
+   */
+  public function info($id) {
+
+    $query = "SELECT *
+              FROM {$this->ITEMTABLE}
+              WHERE id = ? ;";
+    $options = [ 'types' => ['i'], 'params' => [$id] ];
+    return $this->db->query($query, $options)[0] ?? [];
 
   }
 
