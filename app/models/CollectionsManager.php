@@ -99,7 +99,7 @@ class CollectionsManager extends EKEModel {
    */
   public function read(Collection $coll) {
 
-    $query = "SELECT item.name, item.dimension,
+    $query = "SELECT item.name, item.dimension, item.summary,
                      collitem.actionable_, collitem.motivation_,
                      collitem.leading_, collitem.frequency_
               FROM {$this->COLLITEMTABLE} AS collitem
