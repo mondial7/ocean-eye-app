@@ -13,6 +13,7 @@ class CollectionsManager extends EKEModel {
    */
   private $COLLITEMTABLE = 'oceaneye__collection_informationitem';
   private $COLLTABLE = 'oceaneye__collection';
+  private $USERTABLE = 'oceaneye__user';
 
   function __construct() {
 
@@ -76,8 +77,12 @@ class CollectionsManager extends EKEModel {
    */
   public function list() {
     // NOTE will be refactored to target team/project instead of creator
-    $query = "SELECT * FROM {$this->COLLTABLE}
-              WHERE creator = ? ;";
+    $query = "SELECT coll.id, user.email, coll.updated
+              FROM {$this->COLLTABLE} AS coll
+              JOIN {$this->USERTABLE} AS user
+              ON coll.creator = user.id
+              WHERE coll.creator = ?
+              ORDER BY coll.updated DESC;";
     $options = [ 'types' => ['i'], 'params' => [
       Session::get('id'),
     ]];
