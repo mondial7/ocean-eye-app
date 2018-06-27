@@ -73,7 +73,7 @@ class CollectionsManager extends EKEModel {
   /**
    * List all collection items available
    *
-   * @return Array[Item]
+   * @return Array[Collection]
    */
   public function list() {
     // NOTE will be refactored to target team/project instead of creator
@@ -83,6 +83,28 @@ class CollectionsManager extends EKEModel {
               ON coll.creator = user.id
               WHERE coll.creator = ?
               ORDER BY coll.updated DESC;";
+    $options = [ 'types' => ['i'], 'params' => [
+      Session::get('id'),
+    ]];
+    return $this->db->query($query, $options) ?: [];
+
+  }
+
+  /**
+   * Extract/read collection details, given the id
+   *
+   * @param Collection
+   * @return Array
+   */
+  public function read(Collection $coll) {
+
+    $query = "SELECT item.name, item.dimension,
+                     collitem.actionable_, collitem.motivation_,
+                     collitem.leading_, collitem.frequency_
+              FROM {$this->COLLITEMTABLE} AS collitem
+              JOIN {$this->ITEMTABLE} AS item
+              ON collitem.informationitem_id = item.id
+              WHERE collitem.collection_id = ? ;";
     $options = [ 'types' => ['i'], 'params' => [
       Session::get('id'),
     ]];

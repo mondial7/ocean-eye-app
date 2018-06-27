@@ -26,7 +26,8 @@ if (USER_LOGGED) {
     'update'
   );
   array_push($apiPaths['collections'],
-    'add'
+    'add',
+    'read'
   );
   array_push($apiPaths['items'],
     'add',
