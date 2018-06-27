@@ -12,6 +12,7 @@ class CollectionsManager extends EKEModel {
    * @var String
    */
   private $COLLITEMTABLE = 'oceaneye__collection_informationitem';
+  private $ITEMTABLE = 'oceaneye__informationitem';
   private $COLLTABLE = 'oceaneye__collection';
   private $USERTABLE = 'oceaneye__user';
 
@@ -106,7 +107,7 @@ class CollectionsManager extends EKEModel {
               ON collitem.informationitem_id = item.id
               WHERE collitem.collection_id = ? ;";
     $options = [ 'types' => ['i'], 'params' => [
-      Session::get('id'),
+      $coll->getId(),
     ]];
     return $this->db->query($query, $options) ?: [];
 

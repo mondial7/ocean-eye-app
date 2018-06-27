@@ -37,12 +37,12 @@ class Read extends EKEApiController {
 		require_once MODELS_DIR . '/Collection.php';
 
     $collection = new Collection();
-    $collection->setId($_POST[self::ID]);
+    $collection->setId($_GET[self::ID]);
 
     // validate inputs
 		if ($collection->isValid()){
       $this->response = $this->success(
-        'collection details'
+        'collection details',
         (new CollectionsManager())->read($collection)
       );
 		} else {
